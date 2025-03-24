@@ -1,0 +1,97 @@
+/* Ensure styles apply only to this footer */
+.custom-footer {
+  background-color: #082032; /* Deep blue shade for a premium feel */
+  border-bottom: 3px solid #ffcc00;
+  color:  #ffdd57 !important;;
+  padding: 40px 0;
+}
+.custom-footer .footer-info {
+  color: #f66f14d5 !important;  /* Change to your preferred color */
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+
+.footer-logo {
+  width: 150px;
+  margin-bottom: 15px;
+}
+
+.footer-heading {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-list li {
+  margin-bottom: 8px;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: white;
+  transition: 0.3s;
+}
+
+.footer-link:hover {
+  color: #ffcc00;
+}
+
+.footer-subscribe {
+  display: flex;
+  gap: 8px;
+}
+
+.footer-input {
+  flex-grow: 1;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.footer-btn {
+  background: rgb(248, 255, 116);
+  color: rgba(18, 81, 18, 0.574);
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+font-weight: bolder;
+}
+
+/* .footer-btn:hover {
+  /* background: #e6b800;
+} */
+
+.footer-social {
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+}
+
+.footer-icon {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer-icon:hover {
+  color: #ffcc00;
+}
+
+.footer-divider {
+  background: white;
+  margin-top: 20px;
+}
+
+.footer-text {
+  text-align: center;
+  margin-top: 10px;
+}
+.sarthak-footer{
+  color: aliceblue;
+}

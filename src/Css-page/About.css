@@ -1,0 +1,85 @@
+.about-page {
+  padding: 50px 20px;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  background-color: #f8f9fa;
+}
+
+.about-page .about-header .heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.about-page .about-header .sub-heading {
+  font-size: 1.2rem;
+  color: #7f8c8d;
+}
+
+.about-page .about-legacy,
+.about-page .about-mission,
+.about-page .about-trust {
+  margin: 40px 0;
+}
+
+.about-page .about-mission h2,
+.about-page .about-achievements h2,
+.about-page .about-trust h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #d35400;
+  margin-bottom: 15px;
+}
+
+.about-page .about-mission .tagline {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2980b9;
+  margin-top: 10px;
+}
+
+.about-page .why-us-section {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.about-page .about-card {
+  background: linear-gradient(135deg, #ffffff, #f7f7f7);
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.about-page .about-card:hover {
+  transform: scale(1.05);
+}
+
+.about-page .about-card h3 {
+  font-size: 1.5rem;
+  color: #16a085;
+}
+
+.about-page .about-card p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.about-page .about-achievements p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  background: #ecf0f1;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.about-page .about-trust p {
+  font-size: 1.1rem;
+  color: #555;
+  font-style: italic;
+}

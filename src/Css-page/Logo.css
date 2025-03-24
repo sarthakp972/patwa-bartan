@@ -1,0 +1,19 @@
+.patwa-logo {
+    max-width: 150px; /* Default size for desktop */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  /* Medium screens (Tablets) */
+  @media (max-width: 991px) {
+    .patwa-logo {
+      max-width: 120px;
+    }
+  }
+  
+  /* Small screens (Mobile) */
+  @media (max-width: 768px) {
+    .patwa-logo {
+      max-width: 100px;
+    }
+  }
+  

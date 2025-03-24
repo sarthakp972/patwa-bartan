@@ -1,0 +1,18 @@
+/* बॉक्स साइजिंग सही करने के लिए */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* पूरे पेज के लिए स्मूथ स्क्रॉलिंग */
+  /* html {
+    scroll-behavior: smooth;
+  } */
+  
+  /* बॉडी का डिफ़ॉल्ट स्टाइल */
+  body {
+    font-family: "Arial", sans-serif;
+    background-color: #f8f9fa; /* हल्का ग्रे बैकग्राउंड */
+    color: #333; /* टेक्स्ट का रंग */
+  }

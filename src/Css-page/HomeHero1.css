@@ -1,0 +1,49 @@
+.shop-by-metals {
+    background: #f8f9fa;
+    padding: 50px 0;
+  }
+  
+  .section-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: #0078ad;
+    margin-bottom: 30px;
+  }
+  
+  .metal-item {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .metal-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .metal-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .metal-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .metal-name {
+    font-size: 20px;
+    color: #0078ad;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  
+  .metal-description {
+    color: #555;
+    font-size: 16px;
+  }
+  

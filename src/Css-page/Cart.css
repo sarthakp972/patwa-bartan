@@ -1,0 +1,136 @@
+.cart-page {
+  margin-top: 20px;
+}
+
+/* ✅ Stylish Cart Card */
+.cart-card {
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+  background: #ffffff;
+  transition: transform 0.3s ease-in-out;
+}
+
+.cart-card:hover {
+  transform: scale(1.02);
+}
+
+/* ✅ Improved Card Layout */
+.cart-card-body {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  align-items: center;
+}
+
+/* ✅ Product Image */
+.cart-product-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+}
+
+/* ✅ Product Details */
+.cart-product-details {
+  flex-grow: 1;
+}
+
+/* ✅ Product Title */
+.cart-product-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+/* ✅ Product Description */
+.cart-product-description {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* ✅ Price Section */
+.price-section {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.discount-price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.original-price {
+  text-decoration: line-through;
+  font-size: 1.1rem;
+  color: #888;
+}
+
+.discount-label {
+  background: #dc3545;
+  color: white;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* ✅ Quantity Controls */
+.cart-quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.cart-quantity button {
+  padding: 6px 12px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.cart-quantity-value {
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 4px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #f8f9fa;
+}
+
+/* ✅ Remove Button */
+.remove-button {
+  background: #dc3545;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.remove-button:hover {
+  background: #b02a37;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+  .cart-card-body {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .cart-product-image {
+      width: 100px;
+      height: 100px;
+  }
+
+  .cart-quantity {
+      justify-content: center;
+  }
+}

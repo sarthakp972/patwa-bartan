@@ -1,0 +1,101 @@
+/* PatwaNavbar2.css - Unique Styles for PatwaNavbar2 */
+
+/* Premium Navbar Styling */
+.patwa-navbar-compact {
+    background: linear-gradient(to right, #09203f, #537895);
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    height: auto; /* Allow height to adjust based on content */
+    width: 100%; /* Ensure it spans the full width */
+ 
+}
+
+/* Navigation Container */
+.patwa-navbar-compact .navbar-collapse {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden; /* Prevent vertical scrolling */
+    scrollbar-width: thin;
+    scrollbar-color: #dedbda #09203f;
+    height: 100%;
+}
+
+/* Scrollbar for WebKit Browsers */
+.patwa-navbar-compact .navbar-collapse::-webkit-scrollbar {
+    height: 5px; /* Adjusted for better aesthetics */
+}
+
+.patwa-navbar-compact .navbar-collapse::-webkit-scrollbar-thumb {
+    background: #ffdd57; /* Themed scrollbar */
+    border-radius: 10px;
+}
+
+.patwa-navbar-compact .navbar-collapse::-webkit-scrollbar-track {
+    background: #09203f;
+}
+
+/* Navigation Links */
+.patwa-navbar-compact .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden; /* Ensure no vertical scroll */
+}
+
+.patwa-navbar-compact .nav-link {
+    color: #ffffff !important;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 12px 20px;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    white-space: nowrap;
+    border-right: 2px solid #ffdd57;
+    cursor: pointer;
+}
+
+/* Remove border from last item */
+.patwa-navbar-compact .nav-link:last-child {
+    border-right: none;
+}
+
+/* Add glowing underline on hover */
+.patwa-navbar-compact .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0%;
+    height: 2px;
+    background: #ffdd57;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+.patwa-navbar-compact .nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Active Category Styling */
+.patwa-navbar-compact .active-category {
+    font-weight: bold;
+    color: #ffdd57 !important;
+    text-shadow: 0px 0px 8px rgba(255, 204, 0, 0.8);
+    border-bottom: 2px solid #ffdd57;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+    .patwa-navbar-compact {
+        height: auto; /* Slight height adjustment for mobile */
+        padding: 12px 0;
+        margin-top: 83px;
+    }
+
+    .patwa-navbar-compact .nav-link {
+        padding: 10px 15px;
+        font-size: 1rem; /* Responsive font sizing */
+    }
+}

@@ -1,0 +1,24 @@
+.utility-img {
+    width: 200px; /* Default size for larger screens */
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.utility-img:hover {
+    transform: scale(1.1);
+}
+
+.utility-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ✅ Responsive for Small Devices (width < 768px) */
+@media (max-width: 767px) {
+    .utility-img {
+        width: 120px; /* Smaller size for mobile */
+        height: 120px;
+    }
+}

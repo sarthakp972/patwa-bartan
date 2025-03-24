@@ -1,0 +1,46 @@
+/* RunningNav.css */
+
+.running-nav {
+  background-color: #0d3451 ; /* Optional: Background color for better visibility */
+}
+
+.marquee-container {
+  white-space: nowrap;
+  animation: marquee 15s linear infinite; /* Controls the speed of the marquee */
+}
+
+.marquee-text {
+  color: white; /* Customize text color */
+  display: inline-block;
+  font-size: 1rem; /* Base font size */
+  backdrop-filter: none;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .marquee-text {
+    font-size: 0.9rem; /* Decrease font size for medium screens */
+  }
+}
+
+@media (max-width: 992px) {
+  .marquee-text {
+    font-size: 0.8rem; /* Further decrease for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .marquee-text {
+    font-size: 0.7rem; /* Even smaller for mobile */
+  }
+}

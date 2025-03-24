@@ -1,0 +1,6 @@
+/* Home Page Styling */
+.home-container {
+    background-color: #f8f5f0;  /* ✅ Change background color */
+    /* min-height: 100vh; Ensures full-page coverage */
+    /* padding-bottom: 20px; */
+}

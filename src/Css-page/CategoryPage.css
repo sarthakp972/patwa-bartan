@@ -1,0 +1,172 @@
+/* Premium Glassmorphism Card Styling */
+.category-page .product-card {
+  border-radius: 15px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border: none;
+  position: relative;
+}
+
+.category-page .product-card:hover {
+  transform: scale(1.07);
+  box-shadow: 0px 14px 28px rgba(0, 0, 0, 0.3);
+}
+
+/* Sale Badge */
+.category-page .sale-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(45deg, red, darkred);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Card Layout for Small Screens */
+@media (max-width: 576px) {
+  .category-page .product-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .category-page .product-image {
+    width: 100%;
+    /* height: 200px; */
+    object-fit: contain;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .category-page .product-card .card-body {
+    padding: 8px;
+    flex: 1;
+  }
+
+  .category-page .product-title,
+  .category-page .product-description,
+  .category-page .price-section {
+    color: #000 !important;
+    opacity: 1 !important;
+  }
+
+  .category-page .product-title {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .category-page .price-section {
+    justify-content: start;
+  }
+
+  .category-page .add-cart-button {
+    width: auto;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}
+
+/* Product Image */
+.category-page .product-image {
+  /* height: 220px; */
+  object-fit: cover;
+  border-radius: 15px 15px 0 0;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.category-page .product-image:hover {
+  transform: scale(1.02);
+}
+
+/* Product Title */
+.category-page .product-title {
+  /* font-size: 1.3rem; */
+  font-weight: bold;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+/* Pricing Section */
+.category-page .price-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+/* Discounted Price */
+.category-page .discount-price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+/* Original Price */
+.category-page .original-price {
+  font-size: 1rem;
+  text-decoration: line-through;
+  color: #7f8c8d;
+}
+
+/* Add to Cart Button */
+.category-page .add-cart-button {
+  width: 100%;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  /* padding: 12px; */
+  border-radius: 10px;
+  background: linear-gradient(45deg, #6a11cb, #2575fc);
+  color: white;
+  font-size: 1rem;
+  border: none;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+  margin-top: 8px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.category-page .add-cart-button:hover {
+  background: linear-gradient(45deg, #2575fc, #6a11cb);
+  transform: scale(1.08);
+  box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.category-page .sticky-heading {
+   position: sticky; 
+   top: 64px; 
+   z-index: 1040; 
+  background-color: #343a40;
+  color: #ffc107;
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+/* Ensure product description is clear and readable */
+.category-page .product-description {
+  font-size: 1rem;
+  color: #333;
+  text-align: center;
+  margin: 6px 0;
+  line-height: 1.4;
+  font-weight: 500;
+  opacity: 1 !important;
+}
+
+/* additional css */

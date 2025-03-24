@@ -1,0 +1,63 @@
+.gift-promotion {
+  background: #e6f7ff; /* हल्का नीला बैकग्राउंड */
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.gift-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.gift-text {
+  max-width: 50%;
+  text-align: left;
+}
+
+.gift-heading {
+  font-size: 32px;
+  font-weight: bold;
+  color: #0078ad; /* ब्रांड कलर */
+}
+
+.gift-description {
+  font-size: 18px;
+  color: #444;
+  margin-top: 10px;
+}
+
+.explore-btn {
+  background: #0078ad; /* ब्रांड कलर */
+  color: white;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 15px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.explore-btn:hover {
+  background: #005f85; /* गहरा नीला */
+}
+
+.gift-image img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .gift-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .gift-text {
+    max-width: 100%;
+  }
+}
