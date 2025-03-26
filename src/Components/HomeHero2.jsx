@@ -4,6 +4,8 @@ import { ref, onValue } from "firebase/database";
 import { realtimeDB } from "../FirebaseConfig";
 import { Link } from "react-router-dom";
 import useCart from "../context/useCart";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../Css-page/HomeHero2.css";
 
 const HomeHero2 = () => {
@@ -23,6 +25,22 @@ const HomeHero2 = () => {
 
     return () => unsubscribe();
   }, []);
+
+  // 🛒 Function to handle Add to Cart + Toast Notification
+  const handleAddToCart = (product) => {
+    addToCart({ ...product, quantity: 1 });
+
+    // ✅ Show toast notification
+    toast.success(`${product.Title} को कार्ट में जोड़ा गया!`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "colored",
+    });
+  };
 
   return (
     <Container className="loot-sale-container my-5">
@@ -47,7 +65,7 @@ const HomeHero2 = () => {
                 </span>
                 <span className="discount-badge ms-2"> छूट: {product.discount}%</span>
               </p>
-              <Button className="add-to-cart-btn" onClick={() => addToCart({ ...product, quantity: 1 })}>
+              <Button className="add-to-cart-btn" onClick={() => handleAddToCart(product)}>
                 कार्ट में जोड़ें
               </Button>
             </div>

@@ -1,95 +1,115 @@
-// import { useState } from "react";
-// import { auth, googleProvider } from "../FirebaseConfig"; // Ensure correct import
-// import {
-//   createUserWithEmailAndPassword,
-//   sendEmailVerification,
-//   signInWithPopup,
-// } from "firebase/auth";
-// import { useNavigate } from "react-router-dom";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useEffect, useState } from "react";
+import { auth, db, googleProvider } from "../FirebaseConfig";
+import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { Button, Spinner } from "react-bootstrap";
+import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom"; // <-- Import useNavigate
+import "react-toastify/dist/ReactToastify.css";
 
-// const SignUp = () => {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [error, setError] = useState("");
-//   const [message, setMessage] = useState("");
-//   const navigate = useNavigate();
+const SignUp = () => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // <-- Initialize useNavigate
 
-//   // Sign Up with Email & Password and send verification email
-//   const handleSignUp = async (e) => {
-//     e.preventDefault();
-//     setError("");
-//     setMessage("");
+  // Track authentication state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        console.log("User Logged In:", currentUser);
+        await checkAndCreateUser(currentUser);
+        navigate("/profile"); // <-- Redirect to /profile when user is logged in
+      } else {
+        console.log("No user logged in.");
+      }
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, [navigate]);
 
-//     try {
-//       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-//       const user = userCredential.user;
+  // Function to check and create user in Firestore
+  const checkAndCreateUser = async (user) => {
+    try {
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
 
-//       // Send verification email
-//       await sendEmailVerification(user);
-//       setMessage("Verification email sent. Please check your inbox!");
+      if (!userSnap.exists()) {
+        console.log("Creating new user in Firestore...");
+        await setDoc(userRef, {
+          name: user.displayName || "",
+          email: user.email,
+          mobile: "",
+          address: "",
+          Pincode: "",
+          createdAt: new Date(),
+        });
+        console.log("User added to Firestore ✅");
+      } else {
+        console.log("User already exists in Firestore ✅");
+      }
+    } catch (error) {
+      console.error("Error checking Firestore:", error);
+    }
+  };
 
-//       // Optionally, navigate to login page after a few seconds
-//       setTimeout(() => navigate("/login"), 5000);
-//     } catch (err) {
-//       setError(err.message);
-//     }
-//   };
+  // Sign In with Google
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      console.log("Google Sign In Successful:", user);
 
-//   // Google Sign-In
-//   const handleGoogleSignIn = async () => {
-//     try {
-//       await signInWithPopup(auth, googleProvider);
-//       navigate("/");
-//     } catch (err) {
-//       setError("Google Sign-In failed");
-//     }
-//   };
+      // Ensure Firestore document is created
+      await checkAndCreateUser(user);
 
-//   return (
-//     <div className="container mt-5" style={{ maxWidth: "400px" }}>
-//          <div className="d-flex justify-content-center">
-//       <button className="btn btn-danger w-100" onClick={handleGoogleSignIn} 
-//     style={{ padding: "10px", border: "2px solid black" }}>
-//     Sign Up with Google
-//   </button>
-// </div>
-//       <h2 className="text-center">Sign Up</h2>
-//       {error && <div className="alert alert-danger">{error}</div>}
-//       {message && <div className="alert alert-success">{message}</div>}
+      toast.success("Signed in successfully!", { position: "top-right" });
 
-//       <form onSubmit={handleSignUp}>
-//         <div className="mb-3">
-//           <label className="form-label">Email</label>
-//           <input
-//             type="email"
-//             className="form-control"
-//             value={email}
-//             onChange={(e) => setEmail(e.target.value)}
-//             required
-//           />
-//         </div>
-//         <div className="mb-3">
-//           <label className="form-label">Password</label>
-//           <input
-//             type="password"
-//             className="form-control"
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//             required
-//           />
-//         </div>
-//         <button type="submit" className="btn btn-primary w-100">Sign Up</button>
-//       </form>
+      navigate("/profile"); // <-- Redirect to /profile after login
+    } catch (error) {
+      console.error("Error signing in with Google:", error);
+      toast.error("Sign In Failed! Please try again.", { position: "top-right" });
+    }
+    setLoading(false);
+  };
 
-//       <hr />
-     
+  // Sign Out Function
+  const handleSignOut = async () => {
+    setLoading(true);
+    try {
+      await signOut(auth);
+      toast.success("Signed out successfully!", { position: "top-right" });
+      navigate("/"); // <-- Redirect to home after sign out
+    } catch (error) {
+      console.error("Error signing out:", error);
+      toast.error("Sign Out Failed! Please try again.", { position: "top-right" });
+    }
+    setLoading(false);
+  };
 
-//       <div className="mt-3 text-center">
-//         <p>Already have an account? <a href="/login">Login</a></p>
-//       </div>
-//     </div>
-//   );
-// };
+  return (
+    <div className="flex justify-center items-center min-h-screen">
+      {user ? (
+        <Button
+          onClick={handleSignOut}
+          className="d-flex align-items-center gap-2 btn-danger p-3 rounded-lg shadow"
+          disabled={loading}
+        >
+          {loading ? <Spinner animation="border" size="sm" /> : "Sign Out"}
+        </Button>
+      ) : (
+        <Button
+          onClick={handleGoogleSignIn}
+          className="d-flex align-items-center gap-2 btn-light p-3 rounded-lg shadow"
+          disabled={loading}
+        >
+          {loading ? <Spinner animation="border" size="sm" /> : <FcGoogle size={24} />}
+          {loading ? "Signing In..." : "Sign Up with Google"}
+        </Button>
+      )}
+    </div>
+  );
+};
 
-// export default SignUp;
+export default SignUp;

@@ -1,7 +1,7 @@
 // Import necessary Firebase modules
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, GoogleAuthProvider , RecaptchaVerifier } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import { getDatabase } from "firebase/database";
 
@@ -27,4 +27,25 @@ export const storage = getStorage(app); // Firebase storage
 export const realtimeDB = getDatabase(app); // Realtime database
 export const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: "select_account" }); 
+
+export const setUpRecaptcha = (containerId) => {
+  if (!window.recaptchaVerifier) {
+    window.recaptchaVerifier = new RecaptchaVerifier(
+      containerId,  // Pehle containerId pass karein
+      {
+        size: "invisible",
+        callback: (response) => {
+          console.log("ReCAPTCHA Verified", response);
+        },
+        "expired-callback": () => {
+          console.log("ReCAPTCHA Expired. Resetting...");
+          window.recaptchaVerifier = null;
+        },
+      },
+      auth // Yaha auth ka reference pass karna zaroori hai
+    );
+  }
+};
+
+
 export default app;

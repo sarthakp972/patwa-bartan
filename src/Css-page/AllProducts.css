@@ -1,124 +1,81 @@
+/* General styling for the products page */
 .all-products-page {
   padding: 20px;
 }
 
+/* Specific styling for product cards within the all-products-page container */
 .all-products-page .product-card {
-  display: flex;
-  flex-direction: row; /* Image on the left, content on the right */
-  justify-content: flex-start; /* Align items to the left */
-  margin: 10px 0;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  transition: box-shadow 0.3s;
-  overflow: hidden; /* Added to prevent overflow */
- 
-}
-
-.all-products-page .product-card:hover {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.all-products-page .product-image-container {
-  flex: 1 0 150px; /* Set a base width for the image container */
   position: relative; /* Enable positioning for the discount badge */
-  overflow: hidden;
+  height: 100%; /* Ensure all cards have the same height */
+  display: flex; /* Allow flexbox properties for vertical alignment */
+  flex-direction: column; /* Arrange children in a column */
+  border: 1px solid #ddd; /* Optional: Add a border for better definition */
 }
 
+/* Image container styling */
+.all-products-page .product-image-container {
+  position: relative; /* For positioning the discount badge */
+  flex-grow: 1; /* Allow the image to grow to fill space */
+  display: flex; /* Center images */
+  align-items: center;
+  justify-content: center;
+}
+
+/* Product image settings */
 .all-products-page .product-image {
-  width: 350px;
-  height: 400px;
-  transition: transform 0.2s;
+  width: 100%; /* Full width of card */
+  max-height: 200px; /* Set a max height for uniformity */
+  object-fit: cover; /* Maintain aspect ratio */
+  border-radius: 5px; /* Optional: Rounded corners */
 }
 
-.all-products-page .product-card:hover .product-image {
-  transform: scale(1.05);
-}
-
+/* Discount badge styling */
 .all-products-page .discount-badge {
-  position: absolute; /* Position absolute to the container */
-  top: 10px; /* Distance from the top */
-  right: 10px; /* Distance from the right */
-  background-color: red; /* Background color */
-  color: white; /* Text color */
-  padding: 5px 10px; /* Padding for visual appeal */
-  border-radius: 5px; /* Rounded corners */
-  font-weight: bold; /* Emphasize text */
+  position: absolute; /* Overlay on the image */
+  top: 10px;
+  left: 10px;
+  background: rgba(255, 0, 0, 0.8); /* Semi-transparent red background */
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
-.all-products-page .product-info {
-  flex: 2; /* Takes more space than the image */
-  padding: 15px;
-  display: flex;
-  flex-direction: column; /* Stack elements vertically */
-  justify-content: space-between; /* Evenly space items */
-}
-
-.all-products-page .product-title {
-  font-size: 1.4rem;
-  font-weight: bold; /* Added for emphasis */
-  margin-bottom: 5px;
-}
-
+/* Remove underlines from title and description */
+.all-products-page .product-title,
 .all-products-page .product-description {
-  font-size: 1rem;
-  margin-bottom: 10px;
+  text-decoration: none; /* No underline */
 }
 
-.all-products-page .price-section {
-  display: flex;
-  flex-direction: column; /* Stack price information */
-  margin-bottom: 10px; /* Space after price section */
-}
-
-.all-products-page .discount-price {
-  font-size: 1.5rem;
-  color: green;
-}
-
-.all-products-page .original-price {
-  text-decoration: line-through;
-  font-size: 1rem;
-  color: #999;
-}
-
-/* .all-products-page .discount-label {
-  color: red;
-  font-size: 0.9rem; 
-} */
-
-.all-products-page .add-cart-button {
-  margin-top: 10px; /* Space above button */
-}
-
-@media (max-width: 576px) {
-  .all-products-page .product-card {
-      flex-direction: column; /* Stack vertically on small screens */
-      align-items: flex-start;
-     
+/* Responsive grid settings */
+@media (min-width: 992px) { /* Desktop view */
+  .all-products-page .row {
+      display: flex;
+      flex-wrap: wrap; /* Allow wrapping of columns */
   }
-
-  .all-products-page .product-image-container {
-      width: 100%; /* Full width for mobile */
-      
-  }
-
-  .all-products-page .product-image {
-      max-height: 250px; /* Constrain image height */
-      object-fit: cover; /* Cover to maintain aspect ratio */
-      width: 200px;
-  }
-
-  .all-products-page .product-info {
-      width: 100%; /* Full width for info */
-  }
-
-  .all-products-page .price-section {
-      /* flex-direction: row; Keep price elements in a row, if space allows */
-      justify-content: space-between; /* Even spacing */
-      width: 100%; /* Full width */
+  .all-products-page .col-lg-6 {
+      flex: 0 0 25%; /* 4 products per row */
+      max-width: 25%;
+      margin-bottom: 20px; /* Margin bottom for spacing */
   }
 }
-.sarthak-all{
+
+@media (max-width: 991px) { /* Mobile view */
+  .all-products-page .row {
+      display: flex;
+      flex-wrap: wrap; /* Allow wrapping of columns */
+  }
+  .all-products-page .col-lg-6 {
+      flex: 0 0 50%; /* 2 products per row */
+      max-width: 50%;
+      margin-bottom: 20px; /* Margin bottom for spacing */
+  }
+}
+.sarthak-allproduct{
   text-decoration: none;
- 
+  color: black;
+  font-size: 0.9rem;
+}
+a{
+  text-decoration: none;
 }

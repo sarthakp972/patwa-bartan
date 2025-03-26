@@ -1,6 +1,7 @@
-import React from "react";
+// import React, { useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import "../Css-page/About.css";
+// import { auth } from "../FirebaseConfig";
 // import MeetCreators from "../Components/MeetCreators";
 const owners = [
   { name: "श्री जयप्रकाश पटवा", mobile: "+91 9977454799" },

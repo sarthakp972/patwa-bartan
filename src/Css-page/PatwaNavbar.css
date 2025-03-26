@@ -143,3 +143,38 @@
 .auth-button:hover {
   color: #ffdd57 !important;
 }
+
+/* Mobile Search Bar */
+.search-form-mobile {
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffcc00;
+  border-radius: 5px;
+}
+
+.search-input-mobile {
+  width: 80%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-submit-mobile {
+  background-color: #ffcc00;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Search Icon Button */
+.search-button-mobile {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+}
