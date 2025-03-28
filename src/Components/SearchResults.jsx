@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // To access the URL params
+import { Link, useParams } from 'react-router-dom'; // To access the URL params
 import useProductSearch from '../context/useProductSearch'; // Adjust path as needed
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
@@ -58,7 +58,8 @@ function SearchResults() {
                   <h5 className="card-title">{product.title}</h5>
                   <p className="card-text"><strong>Material:</strong> {product.metal}</p>
                   <p className="card-text"><strong>Brand:</strong> {product.brand}</p>
-                  <a href={`/product/${product.id}`} className="btn btn-primary">View Details</a>
+                  <Link to={`/product/${product.id}`} className="btn btn-primary">View Details</Link>
+
                 </div>
               </div>
             </div>

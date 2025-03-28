@@ -56,7 +56,7 @@ const AdminCategoryNav = () => {
     <Navbar bg="dark" variant="dark" expand="lg" className="sticky-top py-2 shadow">
       <Container fluid>
         <Navbar.Brand as={NavLink} to="/admin" className="fw-bold text-light">
-          ⚙ Admin Panel
+          Produc Manage
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="admin-navbar-nav" />
         <Navbar.Collapse id="admin-navbar-nav">

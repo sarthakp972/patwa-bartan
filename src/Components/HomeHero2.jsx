@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Container, Button } from "react-bootstrap";
 import { ref, onValue } from "firebase/database";
 import { realtimeDB } from "../FirebaseConfig";
 import { Link } from "react-router-dom";
 import useCart from "../context/useCart";
 import { toast } from "react-toastify";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 import "../Css-page/HomeHero2.css";
 
 const HomeHero2 = () => {
   const [products, setProducts] = useState([]);
   const { addToCart } = useCart();
+  const scrollContainerRef = useRef(null);
 
   useEffect(() => {
     const homeDiscountRef = ref(realtimeDB, "home_discount_product");
@@ -25,6 +27,17 @@ const HomeHero2 = () => {
 
     return () => unsubscribe();
   }, []);
+
+  // Scroll Function
+  const handleScroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 300; // Adjust as needed
+      scrollContainerRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
 
   // 🛒 Function to handle Add to Cart + Toast Notification
   const handleAddToCart = (product) => {
@@ -43,9 +56,15 @@ const HomeHero2 = () => {
   };
 
   return (
-    <Container className="loot-sale-container my-5">
-      <h2 className="section-title text-center">💥 लूट सेल - भारी छूट पर उत्पाद! 💥</h2>
-      <div className="loot-sale-wrapper">
+    <Container className="home-hero2 my-5">
+    <h2 className="section-title text-center">💥 लूट सेल - भारी छूट पर उत्पाद! 💥</h2>
+    
+    <div className="carousel-container">
+      <button className="carousel-btn left-btn" onClick={() => handleScroll("left")}>
+        <FaChevronLeft />
+      </button>
+  
+      <div className="scroll-container" ref={scrollContainerRef}>
         {products.length > 0 ? (
           products.map((product) => (
             <div key={product.id} className="loot-sale-card">
@@ -57,7 +76,6 @@ const HomeHero2 = () => {
                 />
               </Link>
               <h4 className="product-name mt-2">{product.Title}</h4>
-              <p className="product-description">{product.description}</p>
               <p className="product-price">
                 <span className="old-price">₹{product.Price}</span>
                 <span className="new-price">
@@ -74,7 +92,13 @@ const HomeHero2 = () => {
           <p className="text-center">⏳ उत्पाद लोड हो रहे हैं...</p>
         )}
       </div>
-    </Container>
+  
+      <button className="carousel-btn right-btn" onClick={() => handleScroll("right")}>
+        <FaChevronRight />
+      </button>
+    </div>
+  </Container>
+  
   );
 };
 

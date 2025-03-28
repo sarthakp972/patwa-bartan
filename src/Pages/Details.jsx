@@ -136,7 +136,18 @@ const Details = () => {
               <p><strong>स्टॉक:</strong> {product.stock ? "✅ उपलब्ध" : "⛔ समाप्त"}</p>
               {product.packof && <p><strong>पैक ऑफ:</strong> {product.packof}</p>}
               {product.description && <p><strong>विवरण:</strong> {product.description}</p>}
-              {product.AboutThisItem && <p><strong>उत्पाद के बारे में:</strong> {product.AboutThisItem}</p>}
+              {product.AboutThisItem && (
+  <div>
+    <strong>उत्पाद के बारे में:</strong>
+    <ul>
+      {product.AboutThisItem.split("✔")
+        .filter(point => point.trim() !== "")
+        .map((point, index) => (
+          <li key={index}>✔ {point.trim()}</li>
+        ))}
+    </ul>
+  </div>
+)}
               <Button variant="dark" className="mt-3" href={emailLink}>
                 <FaEnvelope /> ईमेल भेजें
               </Button>

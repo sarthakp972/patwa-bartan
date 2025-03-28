@@ -13,7 +13,7 @@ useEffect(() => {
 const requiredCategories = [
 "Pital", "copper", "aluminium", "cookware", "electronic",
 "gift", "Kanch_Chhini", "kansa", "lakdhi", "nonstick",
-"plastic", "pooja_saman", "steel"
+"plastic", "pooja_saman", "steel","home_vishesh_product","home_discount_product"
 ];
 
 const fetchProducts = async () => {

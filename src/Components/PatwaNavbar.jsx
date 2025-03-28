@@ -31,6 +31,8 @@ const PatwaNavbar = () => {
     else if (hour < 18) setGreeting("Good Afternoon");
     else setGreeting("Good Evening");
   }, []);
+
+  
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {

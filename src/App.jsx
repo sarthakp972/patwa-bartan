@@ -1,7 +1,8 @@
-import { BrowserRouter as Router, Route, Routes ,Navigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { auth } from "./FirebaseConfig";
-import { onAuthStateChanged } from "firebase/auth";
+import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
+
+// 🔹 Components & Pages
 import PatwaNavbar from "./Components/PatwaNavbar";
 import PatwaNavbar2 from "./Components/PatwaNavbar2";
 import Home from "./Pages/Home";
@@ -24,49 +25,57 @@ import OldUtensilExchange from "./Components/OldUtensilExchange";
 import SearchResults from "./Components/SearchResults";
 import SignUp from "./Authentication/SignUp";
 import Profile from "./Authentication/Profile";
-// import { Spinner } from "react-bootstrap";
-// Admin 
-// import AdminCategoryNav from "./Admin/AdminCategoryNav";
+
+// 🔒 Admin Components
 import AdminCategory from "./Admin/AdminCategory";
-// import AdminTableUI from "./Admin/AdminTableUI";
 import AddPage from "./Admin/AddPage";
 import AdminRoute from "./Admin/AdminRoute";
-import PatwaAdmin from "./Admin/PatwaAdmin";
+// import PatwaAdmin from "./Admin/PatwaAdmin";
 import Error from "./Components/Error";
-// import LoginModal from "./Components/LoginModal";
-// import UpdateProduct from "./Admin/UpdateProduct";
+// import AdminNavbar from "./Admin/AdminNavbar";
+import AdminHome from "./Admin/AdminHome";
+import ProductManager from "./Admin/ProductManager";
+import Dashboard from "./Admin/Dashboard";
+import ManageUsers from "./Admin/ManageUsers";
 
 function App() {
-  const [user, setUser] = useState(null);
-  // const [loading, setLoading] = useState(true);
+  const { user, isAdmin, loading } = useContext(AuthContext);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      console.log("App.jsx sarthak",currentUser.uid);
-      // setLoading(false); // 🔹 Loading खत्म करें
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  // 🔹 जब तक Auth लोड हो रहा है, तब तक Spinner दिखाएं
-  // if (loading) {
-  //   return (
-  //     <div className="d-flex justify-content-center align-items-center vh-100">
-  //       <Spinner animation="border" variant="primary" />
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return <div className="d-flex justify-content-center align-items-center vh-100">Loading...</div>;
+  }
 
   return (
     <Router>
-            {/* <LoginModal/> */}
+      <AppContent user={user} isAdmin={isAdmin} />
+    </Router>
+  );
+}
+
+// 🔥 अब `useLocation()` को `Router` के अंदर इस्तेमाल कर रहे हैं
+function AppContent({ user, isAdmin }) {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
+  return (
+    <>
       <ScrollToTop />
-      <PatwaNavbar />
-      <PatwaNavbar2 />
       <ToastContainer position="top-right" autoClose={2000} />
-      
+
+      {/* 🔒 Admin Navbar केवल Admin के लिए */}
+      {isAdminRoute ? (
+        isAdmin ? (
+          <AdminHome />
+        ) : (
+          <Navigate to="/not-authorized" replace />
+        )
+      ) : (
+        <>
+          <PatwaNavbar />
+          <PatwaNavbar2 />
+        </>
+      )}
+
       <Routes>
         <Route path="/search/:query" element={<SearchResults />} />
         <Route path="/all-products" element={<AllProducts />} />
@@ -82,37 +91,31 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/old-utensil-exchange" element={<OldUtensilExchange />} />
         <Route path="/signup" element={<SignUp />} />
-        {/* Admin pannels */}
 
-         {/* 🔒 Protected Admin Routes */}
-         <Route element={<AdminRoute />}>
-         <Route path="/admin/admin_category/:categoryName" element={<AdminCategory />} />
-         <Route path="/add-product/:categoryName" element={<AddPage />} />
-         <Route path="/admin" element={<PatwaAdmin/>} />
-         </Route>
-           {/* Admin pannels End */}
-     
-           {/* not-authorized */}
-           <Route path="/not-authorized" element={<Error/>} />
-           
-             
-        <Route
-      path="/profile"
-      element={user ? <Profile /> : <Navigate to="/signup" />} 
-      />
+        {/* 🔒 Protected Admin Routes */}
+        <Route element={<AdminRoute />}>
+          <Route path="/admin/admin_category/:categoryName" element={<AdminCategory />} />
+          <Route path="/add-product/:categoryName" element={<AddPage />} />
+          {/* <Route path="/admin" element={<PatwaAdmin />} /> */}
+          
+          <Route path="/admin/product-manage" element={<ProductManager/>} />
+          <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/admin/manage-users" element={<ManageUsers/>} />
+        </Route>
 
+        {/* ❌ Unauthorized Page */}
+        <Route path="/not-authorized" element={<Error />} />
+
+            {/* 🔴 Handle Invalid Routes */}
+            <Route path="*" element={<Error />} />
+
+        {/* 🔐 Profile Page (Only for Logged-in Users) */}
+        <Route path="/profile" element={user ? <Profile /> : <Navigate to="/signup" />} />
       </Routes>
-      
+
       <BackToTopButton />
-
       <Footer />
-      
-      
-
-      
-     
-     
-    </Router>
+    </>
   );
 }
 
