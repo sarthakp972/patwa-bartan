@@ -100,7 +100,7 @@ export const translations = {
 
     // Footer
     footer_store_name: "पटवा बर्तन भंडार",
-    footer_owned_by: "स्वामित्व में",
+    footer_owned_by: "प्रो.",
     footer_address:
       "पोस्ट ऑफिस के पास, हर्रई, जिला छिंदवाड़ा, मध्य प्रदेश - 480224",
     footer_know_more: "और जानें",
@@ -274,7 +274,7 @@ export const translations = {
     note_instagram: "Instagram पर देखें",
 
     // Welcome Popup
-    popup_tagline: "हर्रई की सर्वश्रेष्ठ बर्तन दुकान — आपका स्वागत है!",
+    popup_tagline: "हर्रई की सर्वश्रेष्ठ बर्तन दुकान — आपका स्वागत करती है!",
     popup_step1_title: "🛒 उत्पाद कार्ट में जोड़ें",
     popup_step1_body: "अपने पसंदीदा बर्तन चुनें और कार्ट में जोड़ें। हर उत्पाद की विविध विविधता उपलब्ध है।",
     popup_step2_title: "💬 व्हाट्सएप पर बुकिंग करें!",

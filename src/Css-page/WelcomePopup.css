@@ -73,7 +73,8 @@
 
 .welcome-tagline {
   font-size: 0.83rem;
-  opacity: 0.9;
+  font-weight: 600;
+  color: #ffd54f;
   margin: 0;
   line-height: 1.4;
 }

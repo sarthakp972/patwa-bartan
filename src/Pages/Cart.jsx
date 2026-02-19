@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import useCart from "../context/useCart";
 import useLanguage from "../context/useLanguage";
 import "../Css-page/Cart.css";
-import RunningNav from "../Components/RunningNav";
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, getCartCount } = useCart();
@@ -46,7 +45,6 @@ const Cart = () => {
 
   return (
     <div className="container mt-4 cart-page">
-      <RunningNav textArray={[t("cart_running_text")]} />
       <h2 className="text-center mb-4">
         {t("cart_title")} ({getCartCount()} items)
       </h2>
