@@ -1,36 +1,30 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import useLanguage from "../context/useLanguage";
 
 const BrassCare = () => {
+  const { t } = useLanguage();
   return (
     <Container fluid className="py-5" style={{ backgroundColor: "#e0f7fa" }}>
       <Container className="my-5">
         <h1 className="text-center mb-4 text-primary fw-bold">
-          ✨ पीतल, तांबा और कांसा के बर्तनों की बेहतरीन सफाई - अब और भी आसान ✨
+          {t("brass_title")}
         </h1>
-        
-        <p className="fs-5 text-center">
-          पटवा बर्तन भंडार आपके लिए लाया है उन्नत तकनीक द्वारा **पीतल, तांबा और कांसा** के बर्तनों की सफाई की सुविधा।
-          हमारे यहाँ ये बर्तन उचित दाम पर **तेज़, सुरक्षित और प्रभावी तरीकों** से चमकाए जाते हैं।
-        </p>
 
-        <h2 className="text-success mt-5">🔹 हमारे विशेष सफाई समाधान 🔹</h2>
+        <p className="fs-5 text-center">{t("brass_intro")}</p>
+
+        <h2 className="text-success mt-5">{t("brass_solutions_title")}</h2>
         <ul className="fs-5">
-          <li>✅ पुराने बर्तनों की गहरी सफाई, जिससे वे नए जैसे दिखें।</li>
-          <li>✅ किसी भी दाग-धब्बे और ऑक्सीडेशन को पूरी तरह हटाना।</li>
-          <li>✅ बर्तनों की चमक बनाए रखने के लिए प्राकृतिक विधियों का उपयोग।</li>
-          <li>✅ स्वास्थ्य और गुणवत्ता का पूरा ध्यान रखा जाता है।</li>
+          <li>{t("brass_sol1")}</li>
+          <li>{t("brass_sol2")}</li>
+          <li>{t("brass_sol3")}</li>
+          <li>{t("brass_sol4")}</li>
         </ul>
 
-        <h2 className="text-danger mt-5">⚡ क्यों करें हमारे सफाई सेवा का चुनाव? ⚡</h2>
-        <p className="fs-5">
-          आज ही अपने **पीतल, तांबा और कांसा** के पुराने बर्तनों को नया रूप दें! हमारी विशेषज्ञ सेवा में **बेहतर तकनीक और उचित दाम** का लाभ उठाएं।
-          हमारे पास अनुभवी विशेषज्ञ हैं जो बर्तनों को सुरक्षित तरीके से साफ करते हैं, जिससे उनकी **मूल चमक और गुणवत्ता** बनी रहे।
-        </p>
-        
-        <h3 className="text-center text-dark mt-4">
-          🏪 अधिक जानकारी के लिए हमारी दुकान पर पधारें या संपर्क करें!
-        </h3>
+        <h2 className="text-danger mt-5">{t("brass_why_title")}</h2>
+        <p className="fs-5">{t("brass_why_body")}</p>
+
+        <h3 className="text-center text-dark mt-4">{t("brass_visit")}</h3>
       </Container>
     </Container>
   );

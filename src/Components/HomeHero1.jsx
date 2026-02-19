@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { ref, get } from "firebase/database"; // ✅ Import from Firebase Realtime DB
-import { realtimeDB } from "../FirebaseConfig"; // ✅ Import your database instance
+import { ref, get } from "firebase/database";
+import { realtimeDB } from "../FirebaseConfig";
 import "../Css-page/HomeHero1.css";
+import useLanguage from "../context/useLanguage";
 
 const HomeHero1 = () => {
-  const [metals, setMetals] = useState([]); // ✅ State to store fetched data
+  const [metals, setMetals] = useState([]);
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
-  // Fetch metal categories from Firebase Realtime Database
   useEffect(() => {
     const fetchMetals = async () => {
       try {
-        const dbRef = ref(realtimeDB, "metals"); // ✅ Reference to "metals" node
-        const snapshot = await get(dbRef); // ✅ Fetch data
-
+        const dbRef = ref(realtimeDB, "metals");
+        const snapshot = await get(dbRef);
         if (snapshot.exists()) {
-          const metalData = Object.values(snapshot.val()); // ✅ Convert object to array
+          const metalData = Object.values(snapshot.val());
           setMetals(metalData);
         } else {
           console.log("No data found");
@@ -26,18 +26,16 @@ const HomeHero1 = () => {
         console.error("Error fetching metal categories:", error);
       }
     };
-
     fetchMetals();
   }, []);
 
-  // Handle category click
   const handleCategoryClick = (category) => {
     navigate(`/category/${category}`);
   };
 
   return (
     <Container className="shop-by-metals text-center my-5">
-      <h2 className="section-title">मेटल के अनुसार खरीदें</h2>
+      <h2 className="section-title">{t("home_shop_by_metal")}</h2>
       <Row className="mt-4">
         {metals.length > 0 ? (
           metals.map((metal, index) => (
@@ -54,7 +52,7 @@ const HomeHero1 = () => {
             </Col>
           ))
         ) : (
-          <p>लोड हो रहा है...</p>
+          <p>{t("home_loading")}</p>
         )}
       </Row>
     </Container>

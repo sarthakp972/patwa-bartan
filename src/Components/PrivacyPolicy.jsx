@@ -1,99 +1,56 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+import useLanguage from "../context/useLanguage";
 
 const PrivacyPolicy = () => {
+  const { t } = useLanguage();
   return (
     <Container fluid className="py-5" style={{ backgroundColor: "#f0f8ff" }}>
       <Container className="my-5">
         <h2 className="text-center mb-4 text-primary">
-          🔒 पटवा बर्तन भंडार की **गोपनीयता नीति** 🔒
+          {t("privacy_title")}
         </h2>
 
-        <p className="fs-5">
-          **पटवा बर्तन भंडार** आपकी गोपनीयता का सम्मान करता है और आपकी **निजी जानकारी की सुरक्षा** के लिए प्रतिबद्ध है।  
-          यह नीति बताती है कि हम आपकी जानकारी को **कैसे एकत्र, उपयोग और सुरक्षित** रखते हैं।  
-        </p>
+        <p className="fs-5">{t("privacy_intro")}</p>
 
-        {/* 1. जानकारी का संग्रह */}
-        <h3 className="mt-4 text-danger">📌 1. हम कौन-सी जानकारी एकत्र करते हैं?</h3>
-        <p className="fs-5">
-          ✅ **व्यक्तिगत जानकारी:** नाम, फ़ोन नंबर, ईमेल, पता आदि।  
-          ✅ **लेन-देन की जानकारी:** यदि आप दुकान पर खरीदारी करते हैं, तो आपकी खरीदारी का विवरण।  
-          ✅ **संपर्क फ़ॉर्म से जानकारी:** जब आप हमसे वेबसाइट या सोशल मीडिया के माध्यम से संपर्क करते हैं।  
-        </p>
+        <h3 className="mt-4 text-danger">{t("privacy_s1_heading")}</h3>
+        <p className="fs-5">{t("privacy_s1_body")}</p>
 
-        {/* 2. जानकारी का उपयोग */}
-        <h3 className="mt-4 text-danger">📌 2. हम आपकी जानकारी का उपयोग कैसे करते हैं?</h3>
-        <p className="fs-5">
-          ✅ **सेवा सुधार**, ✅ **संपर्क करना**, ✅ **प्रमोशन और ऑफर भेजना**।  
-        </p>
+        <h3 className="mt-4 text-danger">{t("privacy_s2_heading")}</h3>
+        <p className="fs-5">{t("privacy_s2_body")}</p>
 
-        {/* 3. जानकारी की सुरक्षा */}
-        <h3 className="mt-4 text-danger">📌 3. हम आपकी जानकारी की सुरक्षा कैसे सुनिश्चित करते हैं?</h3>
-        <p className="fs-5">
-          🔹 **सुरक्षित सर्वर और एन्क्रिप्शन** के माध्यम से डेटा सुरक्षित रखा जाता है।  
-        </p>
+        <h3 className="mt-4 text-danger">{t("privacy_s3_heading")}</h3>
+        <p className="fs-5">{t("privacy_s3_body")}</p>
 
-        {/* 4. जानकारी साझा करना */}
-        <h3 className="mt-4 text-danger">📌 4. क्या हम आपकी जानकारी किसी तीसरे पक्ष से साझा करते हैं?</h3>
-        <p className="fs-5">
-          🔹 **नहीं!** हम आपकी निजी जानकारी किसी तीसरे पक्ष को **बेचते या साझा नहीं** करते।  
-        </p>
+        <h3 className="mt-4 text-danger">{t("privacy_s4_heading")}</h3>
+        <p className="fs-5">{t("privacy_s4_body")}</p>
 
-        {/* 5. उपयोगकर्ता अधिकार */}
-        <h3 className="mt-4 text-danger">📌 5. आपके अधिकार क्या हैं?</h3>
-        <p className="fs-5">
-          ✅ आप **हमसे अपनी जानकारी देखने, संपादित करने या हटाने** का अनुरोध कर सकते हैं।  
-        </p>
+        <h3 className="mt-4 text-danger">{t("privacy_s5_heading")}</h3>
+        <p className="fs-5">{t("privacy_s5_body")}</p>
 
-        {/* 6. तीसरे पक्ष के विज्ञापन (Third-party Ads) */}
-        <h3 className="mt-4 text-danger">📌 6. तृतीय-पक्ष विज्ञापन और कुकीज़</h3>
-        <p className="fs-5">
-          **पटवा बर्तन भंडार** की वेबसाइट पर तीसरे पक्ष के विज्ञापनदाता कुकीज़, जावास्क्रिप्ट, और वेब बीकन्स जैसी तकनीकों का उपयोग कर सकते हैं।  
-          जब आप हमारी वेबसाइट ब्राउज़ करते हैं, तो ये विज्ञापनदाता **आपका आईपी पता स्वचालित रूप से प्राप्त कर सकते हैं**।  
-          इनका उपयोग विज्ञापनों को व्यक्तिगत बनाने और उनके प्रभाव को मापने के लिए किया जाता है।  
-          कृपया ध्यान दें कि **पटवा बर्तन भंडार इन कुकीज़ को नियंत्रित नहीं करता**।  
-        </p>
+        <h3 className="mt-4 text-danger">{t("privacy_s6_heading")}</h3>
+        <p className="fs-5">{t("privacy_s6_body")}</p>
 
-        {/* 7. बच्चों की जानकारी */}
-        <h3 className="mt-4 text-danger">📌 7. बच्चों की जानकारी</h3>
-        <p className="fs-5">
-          **पटवा बर्तन भंडार** बच्चों की गोपनीयता की सुरक्षा को प्राथमिकता देता है।  
-          हम जानबूझकर **13 वर्ष से कम उम्र के बच्चों से कोई व्यक्तिगत जानकारी एकत्र नहीं करते**।  
-          यदि आपको लगता है कि आपके बच्चे ने हमारी वेबसाइट पर कोई व्यक्तिगत जानकारी दी है,  
-          तो कृपया तुरंत हमसे संपर्क करें। हम जल्द से जल्द ऐसी जानकारी को हटा देंगे।  
-        </p>
+        <h3 className="mt-4 text-danger">{t("privacy_s7_heading")}</h3>
+        <p className="fs-5">{t("privacy_s7_body")}</p>
 
-        {/* 8. केवल ऑनलाइन नीति */}
-        <h3 className="mt-4 text-danger">📌 8. केवल ऑनलाइन गोपनीयता नीति</h3>
-        <p className="fs-5">
-          यह गोपनीयता नीति केवल **हमारी ऑनलाइन गतिविधियों** पर लागू होती है।  
-          यह नीति हमारी वेबसाइट पर साझा या एकत्र की गई जानकारी के लिए मान्य है,  
-          लेकिन यह **ऑफ़लाइन एकत्र की गई जानकारी या अन्य चैनलों के माध्यम से प्राप्त डेटा** पर लागू नहीं होती।  
-        </p>
+        <h3 className="mt-4 text-danger">{t("privacy_s8_heading")}</h3>
+        <p className="fs-5">{t("privacy_s8_body")}</p>
 
-        {/* 9. नीति में बदलाव */}
-        <h3 className="mt-4 text-danger">📌 9. गोपनीयता नीति में बदलाव</h3>
-        <p className="fs-5">
-          हम समय-समय पर इस नीति में **परिवर्तन कर सकते हैं**। कोई भी नया अपडेट हमारी वेबसाइट पर उपलब्ध होगा।  
-        </p>
+        <h3 className="mt-4 text-danger">{t("privacy_s9_heading")}</h3>
+        <p className="fs-5">{t("privacy_s9_body")}</p>
 
-        {/* 10. संपर्क करें */}
-        <h3 className="mt-4 text-danger">📌 10. हमसे संपर्क करें</h3>
+        <h3 className="mt-4 text-danger">{t("privacy_s10_heading")}</h3>
         <p className="fs-5">
-          यदि आपके पास कोई सवाल या गोपनीयता संबंधी चिंता हो, तो आप हमसे संपर्क कर सकते हैं:  
+          {t("privacy_s10_body")}
           <strong className="text-primary">
-            पटवा बर्तन भंडार  
-            <br />
-            पोस्ट ऑफिस के पास, हर्रई, जिला छिंदवाड़ा, मध्य प्रदेश - 480224  
-            <br />
-            📞 9977454799, 9407003015, 9713671554  
+            <br />पटवा बर्तन भंडार
+            <br />पोस्ट ऑफिस के पास, हर्रई, जिला छिंदवाड़ा, मध्य प्रदेश - 480224
+            <br />📞 9977454799, 9407003015, 9713671554
           </strong>
         </p>
 
-        <p className="fs-5 text-center mt-4">
-          🔸 **हम आपकी गोपनीयता की रक्षा करने के लिए प्रतिबद्ध हैं!** 🔸
-        </p>
+        <p className="fs-5 text-center mt-4">{t("privacy_footer")}</p>
       </Container>
     </Container>
   );

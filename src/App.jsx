@@ -5,6 +5,8 @@ import { AuthContext } from "./context/AuthContext";
 // 🔹 Components & Pages
 import PatwaNavbar from "./Components/PatwaNavbar";
 import PatwaNavbar2 from "./Components/PatwaNavbar2";
+import RunningNav from "./Components/RunningNav";
+import useLanguage from "./context/useLanguage";
 import Home from "./Pages/Home";
 import Footer from "./Components/Footer";
 import CategoryPage from "./Pages/CategoryPage";
@@ -18,6 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 import BackToTopButton from "./Components/BackToTopButton";
 import ScrollToTop from "./Components/ScrollToTop";
 import TermsAndConditions from "./Components/TermsAndConditions";
+import WelcomePopup from "./Components/WelcomePopup";
 import FAQ from "./Components/FAQ";
 import BrassCare from "./Components/BrassCare";
 import PrivacyPolicy from "./Components/PrivacyPolicy";
@@ -32,6 +35,7 @@ import AddPage from "./Admin/AddPage";
 import AdminRoute from "./Admin/AdminRoute";
 // import PatwaAdmin from "./Admin/PatwaAdmin";
 import Error from "./Components/Error";
+import SplashLoader from "./Components/SplashLoader";
 // import AdminNavbar from "./Admin/AdminNavbar";
 import AdminHome from "./Admin/AdminHome";
 import ProductManager from "./Admin/ProductManager";
@@ -42,7 +46,7 @@ function App() {
   const { user, isAdmin, loading } = useContext(AuthContext);
 
   if (loading) {
-    return <div className="d-flex justify-content-center align-items-center vh-100">Loading...</div>;
+    return <SplashLoader />;
   }
 
   return (
@@ -55,11 +59,13 @@ function App() {
 // 🔥 अब `useLocation()` को `Router` के अंदर इस्तेमाल कर रहे हैं
 function AppContent({ user, isAdmin }) {
   const location = useLocation();
+  const { t } = useLanguage();
   const isAdminRoute = location.pathname.startsWith("/admin");
 
   return (
     <>
       <ScrollToTop />
+      <WelcomePopup />
       <ToastContainer position="top-right" autoClose={2000} />
 
       {/* 🔒 Admin Navbar केवल Admin के लिए */}
@@ -73,6 +79,7 @@ function AppContent({ user, isAdmin }) {
         <>
           <PatwaNavbar />
           <PatwaNavbar2 />
+          <RunningNav textArray={[t("nav_marquee_text")]} />
         </>
       )}
 

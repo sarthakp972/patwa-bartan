@@ -3,20 +3,21 @@ import { ref, get } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import { realtimeDB } from "../FirebaseConfig";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../Css-page/HomeShopUtility.css"; // Ensure CSS file exists
+import "../Css-page/HomeShopUtility.css";
+import useLanguage from "../context/useLanguage";
 
 function HomeShopUtility() {
   const navigate = useNavigate();
   const [utilities, setUtilities] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const fetchUtilities = async () => {
       try {
-        const utilitiesRef = ref(realtimeDB, "utilities"); // Reference to database path
+        const utilitiesRef = ref(realtimeDB, "utilities");
         const snapshot = await get(utilitiesRef);
-
         if (snapshot.exists()) {
           setUtilities(snapshot.val());
         } else {
@@ -29,15 +30,14 @@ function HomeShopUtility() {
         setLoading(false);
       }
     };
-
     fetchUtilities();
   }, []);
 
   return (
     <section className="py-5 bg-light">
       <div className="text-center mb-4">
-        <p className="text-danger fw-semibold">आपकी सभी जरूरतों के लिए उत्कृष्ट रूप से निर्मित!!</p>
-        <h2 className="fw-bold text-dark">उपयोगिता के अनुसार खरीदारी करें</h2>
+        <p className="text-danger fw-semibold">{t("utility_tagline")}</p>
+        <h2 className="fw-bold text-dark">{t("utility_heading")}</h2>
       </div>
 
       <div className="container">

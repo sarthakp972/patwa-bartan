@@ -9,10 +9,12 @@ import "react-toastify/dist/ReactToastify.css";
 import "../Css-page/Details.css";
 import Note from "../Components/Note";
 import RunningNav from "../Components/RunningNav";
+import useLanguage from "../context/useLanguage";
 
 const Details = () => {
   const { products } = useProducts();
   const { addToCart } = useCart();
+  const { t } = useLanguage();
   const { productId } = useParams();
   const location = useLocation();
 
@@ -35,7 +37,7 @@ const Details = () => {
     return (
       <h2 className="text-center mt-4">
         <Spinner animation="border" variant="primary" />
-        <p>उत्पाद विवरण लोड हो रहा है...</p>
+        <p>{t("details_loading")}</p>
       </h2>
     );
 
@@ -56,7 +58,7 @@ const Details = () => {
     addToCart({ ...product, quantity: 1 });
 
     // ✅ Show toast notification
-    toast.success(`${product.Title} को कार्ट में जोड़ा गया!`, {
+    toast.success(`${product.Title} ${t("details_added_to_cart")}`, {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -116,7 +118,7 @@ const Details = () => {
                       ₹{(product.Price * (1 - product.discount / 100)).toFixed(2)}
                     </span>
                     <span className="original-price">₹{product.Price}</span>
-                    <span className="discount-label">-{product.discount}% की छूट</span>
+                    <span className="discount-label">-{product.discount}% {t("details_off")}</span>
                   </>
                 ) : (
                   <span className="price">₹{product.Price}</span>
@@ -124,21 +126,21 @@ const Details = () => {
               </div>
 
               <Button variant="primary" className="mt-3" onClick={() => handleAddToCart(product)}>
-                <FaShoppingCart /> कार्ट में जोड़ें
+                <FaShoppingCart /> {t("details_add_to_cart")}
               </Button>
               <Button variant="success" className="mt-3 mx-2" href={whatsappLink} target="_blank">
-                <FaWhatsapp /> व्हाट्सएप पर खरीदें
+                <FaWhatsapp /> {t("details_buy_whatsapp")}
               </Button>
               <hr />
-              {product.Metal && <p><strong>धातु:</strong> {product.Metal}</p>}
-              {product.size && <p><strong>आकार:</strong> {product.size}</p>}
-              {product.weight && <p><strong>वज़न:</strong> {product.weight}</p>}
-              <p><strong>स्टॉक:</strong> {product.stock ? "✅ उपलब्ध" : "⛔ समाप्त"}</p>
-              {product.packof && <p><strong>पैक ऑफ:</strong> {product.packof}</p>}
-              {product.description && <p><strong>विवरण:</strong> {product.description}</p>}
+              {product.Metal && <p><strong>{t("details_metal")}:</strong> {product.Metal}</p>}
+              {product.size && <p><strong>{t("details_size")}:</strong> {product.size}</p>}
+              {product.weight && <p><strong>{t("details_weight")}:</strong> {product.weight}</p>}
+              <p><strong>{t("details_stock")}:</strong> {product.stock ? t("details_in_stock") : t("details_out_of_stock")}</p>
+              {product.packof && <p><strong>{t("details_pack_of")}:</strong> {product.packof}</p>}
+              {product.description && <p><strong>{t("details_description")}:</strong> {product.description}</p>}
               {product.AboutThisItem && (
   <div>
-    <strong>उत्पाद के बारे में:</strong>
+    <strong>{t("details_about_item")}:</strong>
     <ul>
       {product.AboutThisItem.split("✔")
         .filter(point => point.trim() !== "")
@@ -149,7 +151,7 @@ const Details = () => {
   </div>
 )}
               <Button variant="dark" className="mt-3" href={emailLink}>
-                <FaEnvelope /> ईमेल भेजें
+                <FaEnvelope /> {t("details_send_email")}
               </Button>
             </div>
           </div>
@@ -161,12 +163,12 @@ const Details = () => {
           {selectedImage && <img src={selectedImage} alt="Enlarged" className="img-fluid" />}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>बंद करें</Button>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>{t("details_close")}</Button>
         </Modal.Footer>
       </Modal>
 
       <div className="mt-4">
-        <RunningNav textArray={["पुराने पीतल, जर्मन, तांबा, और कांसे के बर्तन उचित दाम पर बदले और काटे जाते हैं। अभी संपर्क करें!"]} />
+        <RunningNav textArray={[t("cart_running_text")]} />
       </div>
       <div className="mb-4">
         <hr />

@@ -3,23 +3,23 @@ import { Card, Button } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useCart from "../context/useCart";
+import useLanguage from "../context/useLanguage";
 import "../Css-page/Cart.css";
 import RunningNav from "../Components/RunningNav";
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, getCartCount } = useCart();
+  const { t } = useLanguage();
 
-  // Function to calculate total price
   const calculateTotal = () => {
     return cart.reduce((acc, product) => {
       const discountedPrice = product.discount
         ? product.Price * (1 - product.discount / 100)
         : product.Price;
       return acc + discountedPrice * product.quantity;
-    }, 0).toFixed(2); // Returns total amount with two decimal places
+    }, 0).toFixed(2);
   };
 
-  // Function to format the cart details for WhatsApp
   const formatCartMessage = () => {
     const cartItems = cart.map(product => {
       const discountedPrice = product.discount
@@ -27,13 +27,11 @@ const Cart = () => {
         : product.Price;
       return `${product.Title} - Quantity: ${product.quantity}, Price: ₹${(discountedPrice * product.quantity).toFixed(2)}`;
     });
-
     const totalAmount = calculateTotal();
     const message = `Hello Admin,\n\nHere is my order:\n\n${cartItems.join("\n")}\n\nTotal Amount: ₹${totalAmount}\n\nThank you!`;
     return encodeURIComponent(message);
   };
 
-  // Function to truncate descriptions
   const truncateDescription = (description) => {
     if (!description) return "No description available";
     return description.length > 70 ? description.substring(0, 70) + "…" : description;
@@ -41,16 +39,16 @@ const Cart = () => {
 
   const handleCheckout = () => {
     const message = formatCartMessage();
-    const phoneNumber = "9713671554"; // Admin's WhatsApp number
+    const phoneNumber = "9713671554";
     const url = `https://wa.me/${phoneNumber}?text=${message}`;
     window.open(url, "_blank");
   };
 
   return (
     <div className="container mt-4 cart-page">
-      <RunningNav textArray={["पुराने पीतल, जर्मन, तांबा, और कांसे के बर्तन उचित दाम पर बदले और काटे जाते हैं। अभी संपर्क करें!"]} />
+      <RunningNav textArray={[t("cart_running_text")]} />
       <h2 className="text-center mb-4">
-        🛒 Shopping Cart ({getCartCount()} items)
+        {t("cart_title")} ({getCartCount()} items)
       </h2>
 
       {cart.length > 0 ? (
@@ -87,7 +85,7 @@ const Cart = () => {
                   </div>
 
                   <Button variant="danger" className="remove-button" onClick={() => removeFromCart(product.id)}>
-                    <FaTrash /> Remove
+                    <FaTrash /> {t("cart_remove")}
                   </Button>
                 </div>
               </Card>
@@ -95,41 +93,37 @@ const Cart = () => {
           ))}
         </div>
       ) : (
-        <p className="text-center">Your cart is empty.</p>
+        <p className="text-center">{t("cart_empty")}</p>
       )}
 
       {cart.length > 0 && (
         <div className="total-section text-right mt-3">
-          <h4>Total: ₹{calculateTotal()}</h4>
+          <h4>{t("cart_total")} ₹{calculateTotal()}</h4>
           <Button variant="success" className="checkout-button" onClick={handleCheckout}>
-            व्हाट्सएप पर खरीदें
+            {t("cart_checkout")}
           </Button>
         </div>
       )}
-<hr/>
-      {/* New Information Section for WhatsApp Booking */}
+
+      <hr />
       <div className="info-section mt-4 text-center">
-        <p>आप हमारे व्हाट्सएप पर बर्तन बुक कर सकते हैं और उचित दाम में दुकान पर आकर ले सकते हैं। यदि आप सीधे दुकान से खरीदारी करते हैं, तो आपको बेहतर कीमत मिल सकती है। साथ ही, आपको सीजनल डिस्काउंट का लाभ भी मिल सकता है। यहाँ आपको वो डिस्काउंट मिलेगा, जो कहीं और नहीं मिल सकता, चाहे वह कोई अन्य बर्तन ई-कॉमर्स साइट हो या फिर कोई दूसरी दुकान। कृपया अधिक जानकारी के लिए संपर्क करें।</p>
+        <p>{t("cart_info")}</p>
       </div>
-      <hr/>
-      {/* New Section for Exchange Policy */}
+      <hr />
+
       <div className="exchange-policy-section mt-4 text-center">
-        <h3 className="text-primary">पुराने बर्तन एक्सचेंज नीति</h3>
-        <p>
-          पटवा बर्तन भंडार में, हम आपके पुराने बर्तनों को उचित मूल्य पर खरीदते हैं और नए बर्तन लेने पर भी आपको उचित दर पर एक्सचेंज की सुविधा प्रदान करते हैं।
-        </p>
-        <h4>स्वीकृत धातुएं:</h4>
+        <h3 className="text-primary">{t("cart_exchange_title")}</h3>
+        <p>{t("cart_exchange_body")}</p>
+        <h4>{t("cart_accepted_metals")}</h4>
         <ul className="list-unstyled">
-        <li style={{ color: "goldenrod" }}>पीतल (Brass)</li>
-  <li style={{ color: "brown" }}>तांबा (Copper)</li>
-  <li style={{ color: "darkolivegreen" }}>कांसा (Kansa)</li>
-  <li style={{ color: "silver" }}>एल्यूमिनियम (Aluminium)</li>
+          <li style={{ color: "goldenrod" }}>{t("exchange_metal1")}</li>
+          <li style={{ color: "brown" }}>{t("exchange_metal2")}</li>
+          <li style={{ color: "darkolivegreen" }}>{t("exchange_metal3")}</li>
+          <li style={{ color: "silver" }}>{t("exchange_metal4")}</li>
         </ul>
-        <p>
-          यदि आपके पास उपरोक्त धातुओं के पुराने बर्तन हैं, तो तुरंत हमारी दुकान पर आकर उचित मूल्य पर एक्सचेंज करें। आप हमसे संपर्क भी कर सकते हैं।
-        </p>
+        <p>{t("cart_exchange_cta")}</p>
       </div>
-      <hr/>
+      <hr />
     </div>
   );
 };

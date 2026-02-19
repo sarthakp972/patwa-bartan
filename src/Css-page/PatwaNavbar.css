@@ -74,23 +74,21 @@
 }
 
 /* Cart Count Styling */
- .cart-count {
+.cart-count {
   /* position: absolute;
   top: -5px;
   right: -5px; */
-   background: rgba(51, 0, 255, 0.721); 
-  color:  #ffdd57;
+  background: rgba(51, 0, 255, 0.721);
+  color: #ffdd57;
   font-size: 20px;
   border-radius: 50%;
   border: 2px solid white;
-  
 
   /* display: flex; */
   /* align-items: center;
   justify-content: center; */
- 
-  font-weight: bold;
 
+  font-weight: bold;
 }
 .patwa-navbar .active-category {
   color: #ffdd57 !important;
@@ -98,7 +96,7 @@
   font-weight: bold;
   border-bottom: 3px solid #ffdd57; /* Highlight active category */
 }
-.navbar-toggler{
+.navbar-toggler {
   background-color: #6c757d;
 }
 /* Responsive Adjustments */
@@ -108,7 +106,6 @@
     top: 0;
     left: 0;
     width: 100%;
-    
   }
   .patwa-navbar .search-bar {
     max-width: 100%;
@@ -177,4 +174,36 @@
   border: none;
   color: white;
   font-size: 1.2rem;
+}
+
+/* Language Toggle Button */
+.lang-toggle-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.lang-toggle-btn:hover {
+  background: #ffdd57;
+  color: #0d3451;
+  border-color: #ffdd57;
+}
+
+@media (max-width: 991px) {
+  .lang-toggle-btn {
+    font-size: 0.72rem;
+    padding: 3px 9px;
+  }
 }
