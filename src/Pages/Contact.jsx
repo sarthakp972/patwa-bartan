@@ -49,7 +49,7 @@ const Contact = () => {
           <p>{t("contact_address")}</p>
 
           <h4><FaPhone /> {t("contact_phone_label")}</h4>
-          <p>9977454799, 9407003015, 9713671554, 7649062706</p>
+          <p>9977454799 , 9713671554</p>
 
           <h4><FaEnvelope /> {t("contact_email_label")}</h4>
           <p>Patwa.bartan.bhandar@gmail.com</p>
