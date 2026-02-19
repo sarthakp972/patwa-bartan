@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { auth, db, googleProvider } from "../FirebaseConfig";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { signOut, signInWithPopup } from "firebase/auth";
-import { Button, Spinner, Card, Form, Container, Row, Col } from "react-bootstrap";
+import { Spinner, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useAuth from "../context/useAuth";
-import { FaUserEdit, FaSignOutAlt } from "react-icons/fa";
+import { FaUserEdit, FaSignOutAlt, FaPhoneAlt, FaMapMarkerAlt, FaEnvelope, FaGooglePlusG } from "react-icons/fa";
+import { MdLocationPin } from "react-icons/md";
+import "./Profile.css";
 
 const Profile = () => {
   const { user, isAdmin, loading, setLoading } = useAuth();
@@ -38,7 +40,6 @@ const Profile = () => {
       await signOut(auth);
       toast.success("Signed out successfully!", { position: "top-right" });
     } catch (error) {
-      console.error(error);
       toast.error("Sign Out Failed! Try again.", { position: "top-right" });
     }
     setLoading(false);
@@ -50,17 +51,13 @@ const Profile = () => {
       await signInWithPopup(auth, googleProvider);
       toast.success("Signed in successfully!", { position: "top-right" });
     } catch (error) {
-      console.error(error);
       toast.error("Sign In Failed! Try again.", { position: "top-right" });
     }
     setLoading(false);
   };
 
   const handleEdit = () => setEditMode(true);
-  const handleCancel = () => {
-    setEditMode(false);
-    setFormData(userData);
-  };
+  const handleCancel = () => { setEditMode(false); setFormData(userData); };
 
   const handleSave = async () => {
     if (!user) return;
@@ -72,7 +69,6 @@ const Profile = () => {
       setEditMode(false);
       toast.success("Profile updated successfully!", { position: "top-right" });
     } catch (error) {
-      console.error(error);
       toast.error("Update failed! Try again.", { position: "top-right" });
     }
     setLoading(false);
@@ -80,83 +76,121 @@ const Profile = () => {
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  /* ── Not logged in ── */
   if (!user) {
     return (
-      <Container className="d-flex justify-content-center align-items-center min-vh-100">
-        <Card className="shadow-lg p-4 text-center border-0" style={{ width: "22rem" }}>
-          <Card.Body>
-            <Card.Title className="fw-bold fs-4">🔒 आपको लॉगिन करना होगा</Card.Title>
-            <p className="text-muted">अपनी प्रोफ़ाइल देखने के लिए पहले लॉग इन करें</p>
-            <Button variant="primary" className="mt-3" onClick={handleGoogleSignIn} disabled={loading}>
-              {loading ? <Spinner animation="border" size="sm" /> : "Sign Up with Google"}
-            </Button>
-          </Card.Body>
-        </Card>
-      </Container>
+      <div className="profile-page d-flex align-items-center justify-content-center">
+        <div className="profile-login-card text-center">
+          <div className="profile-lock-icon">🔒</div>
+          <h3 className="profile-login-title">Login Required</h3>
+          <p className="profile-login-sub">Sign in to view and manage your profile</p>
+          <button className="profile-google-btn" onClick={handleGoogleSignIn} disabled={loading}>
+            {loading ? <Spinner animation="border" size="sm" /> : <><FaGooglePlusG /> Sign in with Google</>}
+          </button>
+        </div>
+      </div>
     );
   }
 
+  /* ── Logged in ── */
   return (
-    <Container className="d-flex justify-content-center">
-      <Card className="shadow-lg border-0 p-4" style={{ maxWidth: "450px", width: "100%" }}>
-        <Card.Body className="text-center">
-          <img
-            src={user.photoURL || "https://via.placeholder.com/150"}
-            alt="User Avatar"
-            className="rounded-circle mb-3"
-            style={{ width: "100px", height: "100px", objectFit: "cover", border: "4px solid #ddd" }}
-          />
+    <div className="profile-page">
+      <div className="profile-wrapper">
+
+        {/* ── Header / Avatar ── */}
+        <div className="profile-header">
+          <div className="profile-avatar-ring">
+            <img
+              src={user.photoURL || "https://ui-avatars.com/api/?name=User&background=1565c0&color=fff&size=128"}
+              alt="Avatar"
+              className="profile-avatar"
+            />
+          </div>
+          <h2 className="profile-name">{userData?.name || user.displayName || "User"}</h2>
+          {isAdmin && <span className="profile-badge admin-badge">⚡ Admin</span>}
+          <span className="profile-badge user-badge">👤 Customer</span>
+        </div>
+
+        {/* ── Info / Edit Card ── */}
+        <div className="profile-card">
           {editMode ? (
-            <>
-              <Form.Group>
-                <Form.Label>नाम</Form.Label>
-                <Form.Control type="text" name="name" value={formData.name} onChange={handleChange} />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>मोबाइल</Form.Label>
-                <Form.Control type="text" name="mobile" value={formData.mobile} onChange={handleChange} />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>पता</Form.Label>
-                <Form.Control type="text" name="address" value={formData.address} onChange={handleChange} />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>पिनकोड</Form.Label>
-                <Form.Control type="text" name="Pincode" value={formData.Pincode} onChange={handleChange} />
-              </Form.Group>
-              <Row className="mt-3">
-                <Col>
-                  <Button variant="success" className="w-100" onClick={handleSave} disabled={loading}>
-                    {loading ? <Spinner animation="border" size="sm" /> : "💾 Save"}
-                  </Button>
-                </Col>
-                <Col>
-                  <Button variant="secondary" className="w-100" onClick={handleCancel}>❌ Cancel</Button>
-                </Col>
-              </Row>
-            </>
+            /* Edit form */
+            <div className="profile-edit-form">
+              <h5 className="profile-section-title">✏️ Edit Profile</h5>
+              {[
+                { label: "Full Name", name: "name", type: "text", icon: "👤" },
+                { label: "Mobile", name: "mobile", type: "tel", icon: "📞" },
+                { label: "Address", name: "address", type: "text", icon: "🏡" },
+                { label: "Pincode", name: "Pincode", type: "text", icon: "📍" },
+              ].map(({ label, name, type, icon }) => (
+                <Form.Group key={name} className="profile-field-group">
+                  <Form.Label className="profile-field-label">{icon} {label}</Form.Label>
+                  <Form.Control
+                    className="profile-field-input"
+                    type={type}
+                    name={name}
+                    value={formData[name] || ""}
+                    onChange={handleChange}
+                    placeholder={`Enter ${label.toLowerCase()}`}
+                  />
+                </Form.Group>
+              ))}
+              <div className="profile-action-row">
+                <button className="profile-btn save-btn" onClick={handleSave} disabled={loading}>
+                  {loading ? <Spinner animation="border" size="sm" /> : "💾 Save Changes"}
+                </button>
+                <button className="profile-btn cancel-btn" onClick={handleCancel}>✕ Cancel</button>
+              </div>
+            </div>
           ) : (
+            /* View mode */
             <>
-              <h4 className="fw-bold">{userData?.name || "User"}</h4>
-              <p className="text-muted">📧 {userData?.email || user.email}</p>
-              <p>📞 {userData?.mobile || "Not provided"}</p>
-              <p>🏡 {userData?.address || "Not provided"}</p>
-              <p>📍 {userData?.Pincode || "Not provided"}</p>
-              <Row className="mt-3">
-                <Col>
-                  <Button variant="outline-primary" className="w-100" onClick={handleEdit}><FaUserEdit /> Edit</Button>
-                </Col>
-                <Col>
-                  <Button variant="outline-danger" className="w-100" onClick={handleSignOut} disabled={loading}>
-                    {loading ? <Spinner animation="border" size="sm" /> : <><FaSignOutAlt /> Sign Out</>}
-                  </Button>
-                </Col>
-              </Row>
+              <h5 className="profile-section-title">📋 Profile Details</h5>
+              <div className="profile-info-grid">
+                <div className="profile-info-item">
+                  <FaEnvelope className="info-icon" />
+                  <div>
+                    <span className="info-label">Email</span>
+                    <span className="info-value">{userData?.email || user.email}</span>
+                  </div>
+                </div>
+                <div className="profile-info-item">
+                  <FaPhoneAlt className="info-icon" />
+                  <div>
+                    <span className="info-label">Mobile</span>
+                    <span className="info-value">{userData?.mobile || "Not provided"}</span>
+                  </div>
+                </div>
+                <div className="profile-info-item">
+                  <FaMapMarkerAlt className="info-icon" />
+                  <div>
+                    <span className="info-label">Address</span>
+                    <span className="info-value">{userData?.address || "Not provided"}</span>
+                  </div>
+                </div>
+                <div className="profile-info-item">
+                  <MdLocationPin className="info-icon" />
+                  <div>
+                    <span className="info-label">Pincode</span>
+                    <span className="info-value">{userData?.Pincode || "Not provided"}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="profile-action-row">
+                <button className="profile-btn edit-btn" onClick={handleEdit}>
+                  <FaUserEdit /> Edit Profile
+                </button>
+                <button className="profile-btn signout-btn" onClick={handleSignOut} disabled={loading}>
+                  {loading ? <Spinner animation="border" size="sm" /> : <><FaSignOutAlt /> Sign Out</>}
+                </button>
+              </div>
             </>
           )}
-        </Card.Body>
-      </Card>
-    </Container>
+        </div>
+
+      </div>
+    </div>
   );
 };
 
